@@ -2,6 +2,7 @@ import {AiModel} from "./core/AiModel.ts";
 import {AiGlobalConfig} from "./AiGlobalConfig.ts";
 import {SparkAiModel} from "./spark/SparkAiModel.ts";
 import {WenXinAiModel} from "./wenxin/WenXinAiModel.ts";
+import {FastGPTAiModel} from "./fastgpt/FastGPTAiModel.ts";
 import {Editor} from "@tiptap/core";
 
 export class AiModelManager {
@@ -17,6 +18,9 @@ export class AiModelManager {
                         break;
                     case "wenxin":
                         this.set(key, new WenXinAiModel(editor, globalConfig))
+                        break;
+                    case "fastgpt":
+                        this.set(key, new FastGPTAiModel(editor, globalConfig))
                         break;
                     default:
                         const aiModel = globalConfig.modelFactory?.create(key, editor, globalConfig);

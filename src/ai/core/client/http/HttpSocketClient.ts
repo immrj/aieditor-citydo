@@ -1,7 +1,7 @@
 import { AiClientListener } from "../../AiClientListener.ts";
 import { AiClient } from "../../AiClient.ts";
 
-type configType = { url: string, method: string }
+export type configType = { url: string, method: string, headers: Record<string, string> }
 export class HttpStreamSocketClient implements AiClient {
     isStop: boolean = false
     config: configType;
@@ -37,7 +37,11 @@ export class HttpStreamSocketClient implements AiClient {
     async send(message: string) {
         if (this.isOpen) {
             try {
-                this.fetch = await fetch(this.config.url, { method: this.config.method, body: message })
+                this.fetch = await fetch(this.config.url, {
+                    method: this.config.method,
+                    headers: this.config.headers,
+                    body: message
+                })
                 const response = this.fetch
                 if (!response.body) throw new Error("response.body is none")
 
@@ -47,7 +51,7 @@ export class HttpStreamSocketClient implements AiClient {
                         return;
                     }
                     this.onMessage(decoder.decode(value))
-                    // Continue reading  
+                    // Continue reading
                     return reader.read().then(({ done, value }) => processText({ done, value }));
                 }
                 const reader = response.body.getReader();

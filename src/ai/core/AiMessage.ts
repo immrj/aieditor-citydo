@@ -1,5 +1,5 @@
 export interface AiMessage {
-    role: string,
+    role?: string,
     content: string,
     index: number,
 

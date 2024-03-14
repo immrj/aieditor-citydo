@@ -40,19 +40,60 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    <style>
+        .aie-header-panel {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: #fff;
+        }
+        .aie-container-panel {
+            width: calc(100% - 2rem - 2px);
+            max-width: 800px;
+            margin: 1rem auto;
+            border: 1px solid rgb(229 231 235);
+            background-color: #fff;
+            height: 100%;
+            min-height: 100vh;
+            padding: 1rem;
+            z-index: 99;
+        }
+        .aie-main {
+            position: relative;
+        }
+        .aie-directory-content {
+            position: sticky;
+            top: 108px;
+        }
+        .aie-directory {
+            position: absolute;
+            top: 30px;
+            left: 10px;
+            width: 260px;
+            z-index: 0;
+        }
+    </style>
 </head>
-<body>
-
-
-<div style="padding: 10px 20px;font-size: 30px" id="title">
-    AiEditor，一个面向 AI 的下一代富文本编辑器。
-    <a href="https://gitee.com/aieditor-team/aieditor" target="_blank">获取源码</a>
-    <a href="https://aieditor.dev" target="_blank">访问官网</a>
-    <button onclick="dark()">切换主题</button>
-    <button onclick="changeLang()">切换语言</button>
+<body style="margin: 0;">
+<div id="aiEditor" style="height: 100%;">
+    <div class="aie-container" style="background-color: #f3f4f6">
+        <div class="aie-header-panel">
+            <div class="aie-container-header"></div>
+        </div>
+        <div class="aie-main">
+            <div class="aie-directory-content">
+                <div class="aie-directory">
+                    <h5>文档目录</h5>
+                    <div id="outline"></div>
+                </div>
+            </div>
+            <div class="aie-container-panel">
+                <div class="aie-container-main"></div>
+            </div>
+        </div>
+        <div class="aie-container-footer"></div>
+    </div>
 </div>
-
-<div id="aiEditor" style="height: 450px;  margin: 20px"></div>
 <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
