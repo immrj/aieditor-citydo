@@ -1,7 +1,7 @@
 import { AiClient } from '../core/AiClient.ts';
 import { AiMessageListener } from '../core/AiMessageListener.ts';
 import { AiModel } from '../core/AiModel.ts';
-import { HttpStreamSocketClient, configType } from '../core/client/http/HttpSocketClient.ts';
+import { HttpStreamSocketClient } from '../core/client/http/HttpSocketClient.ts';
 import { AiGlobalConfig } from '../AiGlobalConfig.ts';
 import { Editor } from '@tiptap/core';
 import { FastGPTAiModelConfig } from './FastGPTAiModelConfig.ts';
@@ -24,7 +24,7 @@ export class FastGPTAiModel extends AiModel {
         // 将文本按换行符分割成数组
         let msgStrArray = messageData.split('\n');
         // 遍历数组，解析每个数据并输出
-        msgStrArray.filter(d => d && !d.includes('[DONE]')).forEach(str => {
+        msgStrArray.filter((d: string) => d && !d.includes('[DONE]')).forEach((str: string) => {
           const msg = JSON.parse(str.trim().slice(6));
 
           if (msg.choices != null) {
@@ -43,7 +43,7 @@ export class FastGPTAiModel extends AiModel {
     const object = {
       'stream': true,
       'detail': false,
-      'messages': []
+      'messages': [] as any
     };
 
     object.messages.push(

@@ -156,7 +156,7 @@ declare interface AiMenu {
 }
 
 declare interface AiMessage {
-    role: string;
+    role?: string;
     content: string;
     index: number;
     status: 0 | 1 | 2;

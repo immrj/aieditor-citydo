@@ -10,7 +10,7 @@ export class HttpStreamSocketClient implements AiClient {
     message?: string;
     listener: AiClientListener;
 
-    constructor(config: configType, listener: AiClientListener) {
+    constructor(config: any, listener: AiClientListener) {
         this.config = config;
         this.listener = listener;
     }
