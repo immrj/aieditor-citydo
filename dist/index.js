@@ -17423,6 +17423,7 @@ class P3 extends HTMLElement {
   }
   connectedCallback() {
     const n = document.createElement("div");
+    n.classList.add("header-wrapper");
     for (let r of this.menuButtons)
       n.appendChild(r);
     n.style.display = "flex", n.style.flexWrap = "wrap", this.appendChild(n);
