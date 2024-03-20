@@ -205,6 +205,7 @@ export class AiEditor {
         rootEl.appendChild(this.container);
 
         this.mainEl = document.createElement("div");
+        this.mainEl.classList.add('content-wrapper');
         this.mainEl.style.flexGrow = "1";
         this.mainEl.style.overflow = "auto";
 
