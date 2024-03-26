@@ -4,6 +4,7 @@ import {SparkAiModel} from "./spark/SparkAiModel.ts";
 import {WenXinAiModel} from "./wenxin/WenXinAiModel.ts";
 import {FastGPTAiModel} from "./fastgpt/FastGPTAiModel.ts";
 import {Editor} from "@tiptap/core";
+import {CustomAiModel} from "./custom/CustomAiModel.ts";
 
 export class AiModelManager {
 
@@ -22,6 +23,9 @@ export class AiModelManager {
                     case "fastgpt":
                         this.set(key, new FastGPTAiModel(editor, globalConfig))
                         break;
+                    case "custom":
+                        this.set(key, new CustomAiModel(editor, globalConfig))
+                        break;
                     default:
                         const aiModel = globalConfig.modelFactory?.create(key, editor, globalConfig);
                         if (aiModel) this.set(key, aiModel);
@@ -31,6 +35,9 @@ export class AiModelManager {
     }
 
     static get(modelName: string): AiModel {
+        if (!modelName || modelName === "auto") {
+            modelName = Object.keys(this.models)[0];
+        }
         return this.models[modelName];
     }
 
@@ -39,3 +46,4 @@ export class AiModelManager {
     }
 
 }
+
