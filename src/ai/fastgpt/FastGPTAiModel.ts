@@ -19,7 +19,6 @@ export class FastGPTAiModel extends AiModel {
     return new HttpStreamSocketClient(config, {
       onStart: listener.onStart,
       onStop: listener.onStop,
-      // 星火内容解析 https://www.xfyun.cn/doc/spark/Web.html#_1-%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E
       onMessage: (messageData: any) => {
         // 将文本按换行符分割成数组
         let msgStrArray = messageData.split('\n');
@@ -29,7 +28,7 @@ export class FastGPTAiModel extends AiModel {
 
           if (msg.choices != null) {
             listener.onMessage({
-              content: msg.choices[0].delta.content,
+              content: msg.choices[0].delta.content || '',
               index: msg.choices[0].index,
               status: msg.choices.finish_reason === 'stop' ? 2 : 1
             });
