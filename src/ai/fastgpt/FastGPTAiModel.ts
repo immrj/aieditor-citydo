@@ -24,7 +24,8 @@ export class FastGPTAiModel extends AiModel {
         let msgStrArray = messageData.split('\n');
         // 遍历数组，解析每个数据并输出
         msgStrArray.filter((d: string) => d && !d.includes('[DONE]')).forEach((str: string) => {
-          const msg = JSON.parse(str.trim().slice(6));
+          const jsonStr = str.replace(/[\n\s]/g, '')
+          const msg = JSON.parse(jsonStr.slice(6));
 
           if (msg.choices != null) {
             listener.onMessage({
