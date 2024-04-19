@@ -54,7 +54,7 @@ export class FastGPTAiModel extends AiModel {
 
   createAiClientUrl(): any {
     const aiModelConfig = this.aiModelConfig as FastGPTAiModelConfig;
-    const url = aiModelConfig.isCloud ? 'https://api.fastgpt.in/api/v1/chat/completions' : 'http://172.16.26.68:3006/api/v1/chat/completions';
+    const url = `${aiModelConfig.origin}api/v1/chat/completions`;
     return {
       url,
       method: 'POST',
